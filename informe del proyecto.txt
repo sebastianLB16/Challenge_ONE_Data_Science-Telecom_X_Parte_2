@@ -1,0 +1,77 @@
+
+
+---
+
+# INFORME DE ESTRATEGIA DE NEGOCIO Y PREDICCIÓN DE ABANDONO (CHURN)
+
+**Proyecto:** TelecomX - Fase de Cierre
+**Responsable:** Sebastian Leguizamon
+**Fecha:** 22 de mayo de 2024
+
+---
+
+## 1. RESUMEN EJECUTIVO
+
+Tras el análisis de los modelos de aprendizaje automático, se determina que la **Regresión Logística** es la solución óptima para TelecomX. Este modelo no solo ofrece el mejor equilibrio entre precisión y detección de fugas reales (Recall de 52.13%), sino que permite una interpretación clara de los factores de riesgo para diseñar estrategias comerciales directas.
+
+---
+
+## 2. ANÁLISIS DE IMPORTANCIA DE VARIABLES
+
+### A. Regresión Logística (Modelo Recomendado)
+
+El análisis de los coeficientes revela los disparadores directos del abandono:
+
+* **Variables Críticas de Riesgo:**
+* **Tipo de Contrato (Mes a mes):** Es el factor con mayor peso positivo en la probabilidad de fuga. La falta de compromiso a largo plazo facilita la salida del cliente.
+* **Cargos Mensuales (Monthly Charges):** Existe una correlación directa; a mayor costo mensual sin valor añadido, mayor riesgo.
+* **Internet de Fibra Óptica:** Los clientes con este servicio muestran una tendencia inusual al abandono, lo que sugiere insatisfacción con el precio o la estabilidad del servicio.
+
+
+* **Variables de Retención (Impacto Negativo en Churn):**
+* **Antigüedad (Tenure):** Los clientes con más tiempo en la compañía presentan una lealtad consolidada.
+
+
+
+### B. Random Forest
+
+A través del atributo 'feature_importances_', confirmamos la jerarquía de los datos:
+
+1. **Tenure (Permanencia):** La variable más determinante para segmentar el comportamiento del cliente.
+2. **Total Charges (Gasto Acumulado):** Indica el valor de vida del cliente (LTV); clientes con mayor inversión histórica tienden a ser más estables.
+
+---
+
+## 3. INFORME DE CONCLUSIÓN ESTRATÉGICA
+
+### Factores Críticos (Top 3)
+
+1. **Modalidad Contractual:** Los contratos mensuales son la principal fuente de inestabilidad.
+2. **Ciclo de Vida Temprano:** El riesgo es máximo en los primeros meses de relación (bajo Tenure).
+3. **Sensibilidad al Precio:** Los cargos mensuales elevados actúan como detonante de salida inmediata.
+
+### Propuestas de Retención Accionables
+
+* **Estrategia de Migración:** Implementar una campaña para convertir contratos "mes a mes" en anuales mediante un descuento del 15% en la factura por fidelización.
+* **Programa de Bienvenida (Early Tenure):** Crear un protocolo de atención prioritaria para nuevos clientes durante sus primeros 90 días para reducir la fricción inicial.
+* **Revisión de Valor en Fibra Óptica:** Auditar la calidad del servicio técnico en este segmento para asegurar que el costo sea percibido como justo.
+
+---
+
+## 4. EVALUACIÓN DE MODELOS PARA PRODUCCIÓN
+
+Se dictamina el uso de la **Regresión Logística** en el entorno productivo por las siguientes métricas:
+
+* **Recall (52.13%):** Mayor capacidad para capturar fugas reales frente al 46.52% del Random Forest.
+* **Precision (63.51%):** Alta confiabilidad; cuando el modelo emite una alerta, hay un 63.5% de probabilidad de que el cliente efectivamente esté en riesgo.
+* **Explicabilidad:** Facilita al equipo de marketing entender el "porqué" de cada alerta.
+
+---
+
+## 5. HOJA DE RUTA DE IMPLEMENTACIÓN (3 PASOS)
+
+1. **Integración (Semanas 1-2):** Automatizar el flujo de datos para que el modelo genere alertas diarias basadas en la facturación y el tipo de contrato.
+2. **Piloto de Acción (Semanas 3-6):** Aplicar las estrategias de retención al 52% de clientes identificados por el modelo y medir la tasa de éxito.
+3. **Optimización (Semanas 7+):** Ajustar los umbrales de decisión para reducir los 179 falsos negativos detectados en la validación.
+
+---
